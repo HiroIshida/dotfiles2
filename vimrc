@@ -12,6 +12,8 @@ endif
 " ----------------------------------------------------------
 execute 'source' '~/.vim/rc/filetype.rc.vim'
 
+let g:lsp_diagnostics_enabled = 0         " disable diagnostics support
+
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
