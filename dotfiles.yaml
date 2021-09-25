@@ -1,0 +1,6 @@
+config/nvim/init.vim:
+  .config/nvim/init.vim
+vim:
+  .vim
+vimrc:
+  .vimrc
