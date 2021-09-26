@@ -12,7 +12,9 @@ endif
 " ----------------------------------------------------------
 execute 'source' '~/.vim/rc/filetype.rc.vim'
 
+" vim-lsp settings
 let g:lsp_diagnostics_enabled = 0         " disable diagnostics support
+let g:lsp_document_code_action_signs_enabled = 0
 
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger="<tab>"
