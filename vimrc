@@ -13,9 +13,21 @@ endif
 execute 'source' '~/.vim/rc/filetype.rc.vim'
 
 " vim-lsp settings
-let g:lsp_diagnostics_enabled = 0         " disable diagnostics support
+let g:lsp_diagnostics_enabled = 1 " disable diagnostics support
+let g:lsp_diagnostics_echo_cursor = 1 " show error message
 let g:lsp_document_code_action_signs_enabled = 0
+au BufNewFile,BufRead * call lsp#disable_diagnostics_for_buffer() " lsp diag off by default
+command LSPDIAG call lsp#enable_diagnostics_for_buffer()
+command LSPNODIAG call lsp#disable_diagnostics_for_buffer()
+cnoreabbrev lspdiag LSPDIAG
+cnoreabbrev lspnodiag LSPNODIAG
+cnoreabbrev lspdef LspDefinition
+cnoreabbrev lspdec LspDeclaration
+cnoreabbrev lspimpl LspImplementation
+cnoreabbrev lspref LspReferences
+cnoreabbrev lsphover LspReferences
 
+" ulti snip settings
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
