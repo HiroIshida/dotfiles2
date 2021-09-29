@@ -25,6 +25,7 @@ cnoreabbrev lspdef LspDefinition
 cnoreabbrev lspdec LspDeclaration
 cnoreabbrev lspimpl LspImplementation
 cnoreabbrev lspref LspReferences
+cnoreabbrev lsprename LspRename
 cnoreabbrev lsphover LspReferences
 
 " ulti snip settings
