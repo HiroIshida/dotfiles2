@@ -13,6 +13,10 @@ autocmd BufRead,BufNewFile *.tpp setfiletype cpp
 autocmd BufRead,BufNewFile *.ino setfiletype cpp
 au BufRead,BufNewFile *.l set filetype=lisp
 
+"---------- indent-----------"
+autocmd BufEnter *.cpp set tabstop=2
+autocmd BufEnter *.cpp set shiftwidth=2
+
 
 "---------- color schemes-----------"
 syntax on
