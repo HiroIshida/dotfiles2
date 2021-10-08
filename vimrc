@@ -84,6 +84,9 @@ set mouse=a
 set ttymouse=xterm2
 
 "---------- custom EX command------------"
+command SETCURRENT cd %:p:h
+cnoreabbrev cdc SETCURRENT
+
 command DOACTION w|!./action.sh
 cnoreabbrev ww DOACTION
 
