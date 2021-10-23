@@ -28,6 +28,9 @@ cnoreabbrev lspref LspReferences
 cnoreabbrev lsprename LspRename
 cnoreabbrev lsphover LspReferences
 
+command PRIVATECPP /\<\w*_\>
+cnoreabbrev privatecpp PRIVATECPP
+
 " ulti snip settings
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger="<tab>"
