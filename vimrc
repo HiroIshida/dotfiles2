@@ -74,17 +74,12 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 set clipboard=unnamed
 inoremap <silent> jj <ESC>
 inoremap <C-c> <ESC>
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
 nnoremap <S-Left>  <C-w><<CR>
 nnoremap <S-Right> <C-w>><CR>
 nnoremap <S-Up>    <C-w>-<CR>
 nnoremap <S-Down>  <C-w>+<CR>
 
 set mouse=a
-set ttymouse=xterm2
 
 "---------- custom EX command------------"
 command SETCURRENT cd %:p:h
