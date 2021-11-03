@@ -1,6 +1,12 @@
+bash:
+  .bash
+bashrc:
+  .bashrc
 config/nvim/init.vim:
   .config/nvim/init.vim
 vim:
   .vim
 vimrc:
   .vimrc
+scripts/editjump.py:
+  .local/bin/editjump.py
