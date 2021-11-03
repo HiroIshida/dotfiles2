@@ -1,0 +1,10 @@
+[user]
+	name = HiroIshida
+	email = spitfire.docomo@gmail.com
+[alias]
+  tree = log --graph --oneline --decorate --all
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=iso
+[merge]
+    ff = false
+[core]
+	editor = vim
