@@ -8,4 +8,5 @@ cdls()
 }
 alias cd="cdls"
 
+export PATH=$HOME/.local/bin:$PATH
 export SSH_USER=h-ishida
