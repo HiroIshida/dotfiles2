@@ -12,3 +12,5 @@ scripts/editjump.py:
   .local/bin/editjump.py
 gitconfig:
   .gitconfig
+tmux.conf:
+  .tmux.conf
