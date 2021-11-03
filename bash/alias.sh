@@ -63,7 +63,7 @@ alias g='gedit'
 alias addj='editjump.py'
 
 # jump alias for ros
-if [ -d "/opt/ros" ]; then
+if [ -d "/opt/ros/noetic" ]; then
   alias workstation='export ROS_MASTER_URI=http://hiro-workstation:11311'
   alias pr2='rossetip; rossetmaster pr1040'
   alias pr8='rossetip; rossetmaster pr1012'
@@ -109,6 +109,30 @@ if [ -d "/opt/ros" ]; then
     rm tmp
   }
 
+fi
+
+if [ -d "/opt/ros/galactic/" ]; then
+    alias clear_log='rm -rf /home/h-ishida/.ros/log'
+    # roscd
+    _ros2pkglist() {
+        _init_completion || return
+        COMPREPLY=( $(compgen -W '$(ros2 pkg list)' -- "$cur") )
+    }
+
+    function roscd () {
+        local prefix path src_path pkg_path
+        prefix=${1%/}
+        if [ $prefix ]; then
+            path=`ros2 pkg prefix ${prefix} --share`
+            src_path=`readlink -f $path/package.xml`
+            pkg_path=(${src_path//package/ })
+            cd ${pkg_path[0]}
+        fi
+    }
+    complete -F _ros2pkglist -o "nospace" "roscd"
+
+    alias cbps='colcon build --packages-select'
+    complete -F _ros2pkglist -o "nospace" "cbps"
 fi
 
 image_view () {
