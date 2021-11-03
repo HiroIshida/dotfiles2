@@ -14,3 +14,5 @@ gitconfig:
   .gitconfig
 tmux.conf:
   .tmux.conf
+Xmodmap:
+  .Xmodmap
