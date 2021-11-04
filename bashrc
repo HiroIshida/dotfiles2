@@ -9,4 +9,10 @@ cdls()
 alias cd="cdls"
 
 export PATH=$HOME/.local/bin:$PATH
+if [ -d "$HOME/.pyenv" ]; then
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
 export SSH_USER=h-ishida
