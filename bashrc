@@ -2,6 +2,11 @@ source $HOME/.bash/default.sh
 source $HOME/.bash/alias.sh
 source $HOME/.jump_alias.sh # created by editjump.py
 
+FILE=$HOME/.bash/user_specific.sh
+if test -f "$FILE"; then
+    source $FILE
+fi
+
 cdls()
 {
     \cd "$@" && ls
