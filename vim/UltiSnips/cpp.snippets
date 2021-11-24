@@ -1,5 +1,5 @@
 snippet print "begin and end"
-std::cout << $0 << std::endl; 
+RCLCPP_INFO_STREAM(rclcpp::get_logger("ishida_debug"), $0);
 endsnippet
 
 snippet for "for loop"
