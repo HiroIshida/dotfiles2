@@ -133,6 +133,11 @@ if [ -d "/opt/ros/galactic/" ]; then
 
     alias cbps='colcon build --packages-select'
     complete -F _ros2pkglist -o "nospace" "cbps"
+
+    function cdlatest () {
+        cd ~/.ros/log 
+        cd $(ls -td -- */ | head -n 1)
+    }
 fi
 
 image_view () {
