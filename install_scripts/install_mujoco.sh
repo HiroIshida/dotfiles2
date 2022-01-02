@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/usr/bin/bash
+sudo apt update && sudo apt-get install libosmesa6-dev -qq -y
 
 set -e 
+
 INSTALLDIR=$HOME/.mujoco
 FILE=$INSTALLDIR/mujoco210
 if [[ -d "$FILE" ]]; then
