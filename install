@@ -122,6 +122,9 @@ def main():
         '-p', '--private', action='store_true', help='install private'
     )
     parser.add_argument(
+        '-l', '--light', action='store_true', help='install only dot files'
+    )
+    parser.add_argument(
         '-s',
         '--sudo',
         action='store_true',
@@ -141,7 +144,8 @@ def main():
         install_private(dry_run=args.dry_run)
 
     install_dotfiles(dry_run=args.dry_run)
-    install_commands(dry_run=args.dry_run, sudo=args.sudo)
+    if not args.light:
+        install_commands(dry_run=args.dry_run, sudo=args.sudo)
 
 
 if __name__ == '__main__':
