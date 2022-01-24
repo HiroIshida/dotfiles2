@@ -19,7 +19,12 @@ autocmd BufEnter *.cpp set shiftwidth=2
 
 "---------- color schemes-----------"
 syntax on
-colorscheme apprentice
+try
+    colorscheme apprentice
+catch
+    colorscheme morning
+endtry
+
 autocmd BufEnter *.md colorscheme morning
 autocmd BufEnter *.tex colorscheme morning
 
