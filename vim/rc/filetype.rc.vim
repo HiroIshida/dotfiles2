@@ -28,6 +28,9 @@ endtry
 autocmd BufEnter *.md colorscheme morning
 autocmd BufEnter *.tex colorscheme morning
 
+"---------- indent ----------------"
+autocmd Filetype xml setlocal ts=2 sw=2 expandtab
+
 "---------- spell check -----------"
 autocmd BufEnter *.tex setlocal spell spelllang=en_us | set spelllang+=cjk | set spell
 autocmd BufEnter *.md setlocal spell spelllang=en_us | set spell
