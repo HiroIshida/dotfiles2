@@ -4,6 +4,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-airline/vim-airline'
 Plug 'JuliaEditorSupport/julia-vim'
 Plug 'sirver/ultisnips'
+Plug 'rking/ag.vim'
 
 "lsp stuff
 Plug 'prabirshrestha/vim-lsp'
