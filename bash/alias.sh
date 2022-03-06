@@ -63,7 +63,7 @@ alias g='gedit'
 alias addj='editjump.py'
 
 # jump alias for ros
-if [ -d "/opt/ros/noetic" ]; then
+if [ -d "/opt/ros/noetic" ] || [ -d "/opt/ros/melodic" ]; then
   alias workstation='export ROS_MASTER_URI=http://hiro-workstation:11311'
   alias pr2='rossetip; rossetmaster pr1040'
   alias pr8='rossetip; rossetmaster pr1012'
