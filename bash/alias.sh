@@ -55,6 +55,8 @@ alias ggbd='git branch -D'
 
 alias pudb="python -m pudb"
 alias vbash='vim ~/.bashrc'
+alias vbash2='vim ~/.bash/user_specific.sh'
+alias vlog='vim ~/Dropbox/articles/log'
 alias sbash='source ~/.bashrc'
 alias vvim='vim ~/.vimrc'
 alias gno='xdg-open .'
