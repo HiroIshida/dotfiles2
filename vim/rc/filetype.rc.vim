@@ -3,6 +3,7 @@ filetype on
 
 autocmd BufRead,BufNewFile *.jl setfiletype julia
 autocmd BufRead,BufNewFile *.launch setfiletype xml
+autocmd BufRead,BufNewFile *.test setfiletype xml
 autocmd BufRead,BufNewFile *.xacro setfiletype xml
 autocmd BufRead,BufNewFile *.world setfiletype xml
 autocmd BufRead,BufNewFile *.urdf setfiletype xml
