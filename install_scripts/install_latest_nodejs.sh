@@ -5,3 +5,5 @@ sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
 sudo n latest
+
+echo "NOTE by Ishida: maybe you need to add 104.16.20.35 registry.npmjs.org to /etc/hosts"
