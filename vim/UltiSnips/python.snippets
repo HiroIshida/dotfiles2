@@ -1,3 +1,7 @@
+snippet typing "import typing" i
+from typing import Any, Optional, TypeVar, Generic, List, Tuple
+endsnippet
+
 snippet embed "embed" i
 from IPython import embed; embed()
 endsnippet
@@ -14,6 +18,10 @@ snippet print "insert docstring math" i
 print(${1:${VISUAL}})$0
 endsnippet
 
-snippet embed "insert docstring math" i
-from IPython import embed; embed()
+snippet prof "proefiler" i
+from pyinstrument import Profiler
+profiler = Profiler()
+profiler.start()
+profiler.stop()
+print(profiler.output_text(unicode=True, color=True, show_all=True))
 endsnippet
