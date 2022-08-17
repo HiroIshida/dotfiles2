@@ -21,7 +21,7 @@ autocmd BufEnter *.cpp set shiftwidth=2
 "---------- color schemes-----------"
 syntax on
 try
-    colorscheme apprentice
+    colorscheme black_angus
 catch
     colorscheme morning
 endtry
