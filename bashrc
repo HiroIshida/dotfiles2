@@ -24,9 +24,12 @@ if [ -d "$HOME/.pyenv" ]; then
 fi
 
 export SSH_USER=h-ishida
-
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=10000
+
+if [ -n "$SSH_TTY" ]; then
+    export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+fi
 
 # percol setting
 _replace_by_history() {
