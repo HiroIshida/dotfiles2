@@ -2,6 +2,10 @@ snippet typing "import typing" i
 from typing import Any, Optional, TypeVar, Generic, List, Tuple
 endsnippet
 
+snippet ignore "type ignore" i
+  # type: ignore
+endsnippet
+
 snippet embed "embed" i
 from IPython import embed; embed()
 endsnippet
@@ -24,4 +28,22 @@ profiler = Profiler()
 profiler.start()
 profiler.stop()
 print(profiler.output_text(unicode=True, color=True, show_all=True))
+endsnippet
+
+snippet import "import" i
+import argparse
+import matplotlib.pyplot as plt
+import numpy as np
+from pathlib import Path
+from tempfile import TemporaryDirectory
+endsnippet
+
+snippet argparse "argparse" i
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("-pn", type=str, help="project name")
+parser.add_argument("--warm", action="store_true", help="warm start")
+args = parser.parse_args()
+project_name: Optional[str] = args.pn
+warm_start: bool = args.warm
 endsnippet
