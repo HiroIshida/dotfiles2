@@ -22,6 +22,10 @@ alias sshjsk4='ssh h-ishida@aries.jsk.t.u-tokyo.ac.jp -t ssh h-ishida@dlbox4.jsk
 alias sshjsk5='ssh h-ishida@aries.jsk.t.u-tokyo.ac.jp -t ssh h-ishida@dlbox5.jsk.imi.i.u-tokyo.ac.jp'
 alias ssharies='ssh h-ishida@aries.jsk.t.u-tokyo.ac.jp'
 
+
+# python
+alias argrep='grep argparse -A 20'
+
 # alias related to git
 source /usr/share/bash-completion/completions/git # to use auto compleation
 alias ggc='git commit'
@@ -56,7 +60,8 @@ alias ggbd='git branch -D'
 alias pudb="python -m pudb"
 alias vbash='vim ~/.bashrc'
 alias vbash2='vim ~/.bash/user_specific.sh'
-alias vlog='vim ~/Dropbox/articles/log'
+alias vlog='vim ~/Dropbox/articles/logs/log'
+alias llog='less ~/Dropbox/articles/logs/log'
 alias sbash='source ~/.bashrc'
 alias vvim='vim ~/.vimrc'
 alias gno='xdg-open .'
