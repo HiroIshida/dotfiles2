@@ -36,6 +36,12 @@ function mohou_to () {
     rsync -av --progress ~/.mohou/$pn $to:~/.mohou/
 }
 
+function mohou_diff () {
+    cd ~/python/mohou && git --no-pager diff && echo "checked mohou"
+    cd ~/python/bunsetsu && git --no-pager diff && echo "checked bunsetsu"
+    cd ~/misc/ieee-icra-2023 && git --no-pager diff && echo "checked icra"
+}
+
 # python
 alias argrep='grep argparse -A 20'
 
