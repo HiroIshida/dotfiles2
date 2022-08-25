@@ -37,9 +37,9 @@ function mohou_to () {
 }
 
 function mohou_diff () {
-    cd ~/python/mohou && git --no-pager diff && echo "checked mohou"
-    cd ~/python/bunsetsu && git --no-pager diff && echo "checked bunsetsu"
-    cd ~/misc/ieee-icra-2023 && git --no-pager diff && echo "checked icra"
+    cd ~/python/mohou && git --no-pager diff && git branch | grep "*" && echo "checked mohou"
+    cd ~/python/bunsetsu && git --no-pager diff && git branch | grep "*" && echo "checked bunsetsu"
+    cd ~/misc/ieee-icra-2023 && git --no-pager diff && git branch | grep "*" && echo "checked icra"
 }
 
 # python
@@ -71,6 +71,7 @@ alias ggbd='git branch -D'
 alias ggchm='git checkout master'
 alias ggcl='git clone'
 alias ggp='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias ggupdate='git fetch origin && git rebase origin/$(git rev-parse --abbrev-ref HEAD)'
 alias ggpf='ggp -f'
 alias ggsa='git submodule add'
 alias ggri='git rebase -i'
