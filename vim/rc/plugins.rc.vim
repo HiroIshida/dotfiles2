@@ -5,6 +5,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'JuliaEditorSupport/julia-vim'
 Plug 'sirver/ultisnips'
 Plug 'rking/ag.vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 "lsp stuff
 Plug 'prabirshrestha/vim-lsp'
