@@ -7,6 +7,23 @@ if &g:loadplugins
   endif
 endif
 
+
+" ----------------------------------------------------------
+" default color
+" ----------------------------------------------------------
+
+syntax on
+try
+    colorscheme torte
+    "colorscheme evening
+    "colorscheme black_angus
+    "colorscheme PaperColor
+    "colorscheme default
+catch
+    "colorscheme morning
+endtry
+
+
 " ----------------------------------------------------------
 " file specific settings
 " ----------------------------------------------------------

@@ -19,15 +19,6 @@ autocmd BufEnter *.cpp set tabstop=2
 autocmd BufEnter *.cpp set shiftwidth=2
 
 "---------- color schemes-----------"
-syntax on
-try
-    "colorscheme black_angus
-    colorscheme PaperColor
-    set background=dark
-catch
-    colorscheme morning
-endtry
-
 autocmd BufEnter *.md colorscheme morning
 autocmd BufEnter *.tex colorscheme morning
 
