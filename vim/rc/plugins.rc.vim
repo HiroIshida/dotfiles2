@@ -7,6 +7,9 @@ Plug 'sirver/ultisnips'
 Plug 'rking/ag.vim'
 Plug 'NLKNguyen/papercolor-theme'
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 "lsp stuff
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'

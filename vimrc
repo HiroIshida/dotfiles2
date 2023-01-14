@@ -11,18 +11,7 @@ endif
 " ----------------------------------------------------------
 " default color
 " ----------------------------------------------------------
-
 syntax on
-try
-    colorscheme torte
-    "colorscheme evening
-    "colorscheme black_angus
-    "colorscheme PaperColor
-    "colorscheme default
-catch
-    "colorscheme morning
-endtry
-
 
 " ----------------------------------------------------------
 " file specific settings
@@ -62,11 +51,8 @@ set hidden
 set showcmd
 set number
 set cursorline
-"set cursorcolumn
 
 set virtualedit=onemore
-"set smartindent
-set visualbell
 set showmatch
 set laststatus=2
 set statusline=%F
