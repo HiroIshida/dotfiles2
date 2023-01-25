@@ -38,3 +38,9 @@ _replace_by_history() {
     READLINE_POINT=${#l}
 }
 bind -x '"\C-r": _replace_by_history'
+
+# fzf setting
+vimf() {
+    file=$(fzf)
+    vim $file
+}

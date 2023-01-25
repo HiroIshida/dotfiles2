@@ -85,6 +85,9 @@ nnoremap <S-Down>  <C-w>+<CR>
 set mouse=a
 
 "---------- custom EX command------------"
+cnoreabbrev fzf FZF
+
+cnoreabbrev cdc SETCURRENT
 command SETCURRENT cd %:p:h
 cnoreabbrev cdc SETCURRENT
 
