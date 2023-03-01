@@ -41,6 +41,22 @@ bind -x '"\C-r": _replace_by_history'
 
 # fzf setting
 vimf() {
-    file=$(fzf)
-    vim $file
+    local selected_file=$(fzf --preview 'echo {}' --query "$1" --select-1 --exit-0)
+    if [ -n "$selected_file" ]; then
+        vim $selected_file
+    fi
+}
+
+lessf() {
+    local selected_file=$(fzf --preview 'echo {}' --query "$1" --select-1 --exit-0)
+    if [ -n "$selected_file" ]; then
+        less $selected_file
+    fi
+}
+
+cdf() {
+    local selected_file=$(fzf --preview 'echo {}' --query "$1" --select-1 --exit-0)
+    if [ -n "$selected_file" ]; then
+        cd "$(dirname "$selected_file")/.."
+    fi
 }
