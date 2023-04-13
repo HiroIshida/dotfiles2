@@ -27,11 +27,13 @@ command LSPDIAG call lsp#enable_diagnostics_for_buffer()
 command LSPNODIAG call lsp#disable_diagnostics_for_buffer()
 cnoreabbrev lspdiag LSPDIAG
 cnoreabbrev lspnodiag LSPNODIAG
-cnoreabbrev lspdef LspDefinition
+cnoreabbrev def LspDefinition
+"cnoreabbrev lspdef LspDefinition
 cnoreabbrev lspdec LspDeclaration
 cnoreabbrev lspimpl LspImplementation
 cnoreabbrev lspref LspReferences
-cnoreabbrev lsprename LspRename
+cnoreabbrev rename LspRename
+"cnoreabbrev lsprename LspRename
 cnoreabbrev lsphover LspReferences
 
 command PRIVATECPP /\<\w*_\>
