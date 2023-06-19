@@ -27,7 +27,7 @@ command LSPDIAG call lsp#enable_diagnostics_for_buffer()
 command LSPNODIAG call lsp#disable_diagnostics_for_buffer()
 cnoreabbrev lspdiag LSPDIAG
 cnoreabbrev lspnodiag LSPNODIAG
-cnoreabbrev def LspDefinition
+cnoreabbrev ldef LspDefinition
 "cnoreabbrev lspdef LspDefinition
 cnoreabbrev lspdec LspDeclaration
 cnoreabbrev lspimpl LspImplementation
