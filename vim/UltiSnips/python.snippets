@@ -16,18 +16,6 @@ snippet typing "import typing" i
 from typing import Any, Optional, TypeVar, Generic, List, Tuple
 endsnippet
 
-snippet mohou "import mohou" i
-import torch
-import numpy as np
-from mohou.types import EpisodeBundle
-from mohou.trainer import TrainCache
-from mohou.model.autoencoder import VariationalAutoEncoder
-from mohou.model.lstm import LSTM
-from mohou.types import RGBImage, AngleVector
-from mohou.dataset.sequence_dataset import AutoRegressiveDataset, AutoRegressiveDatasetConfig
-from pathlib import Path
-endsnippet
-
 snippet ignore "type ignore" i
   # type: ignore
 endsnippet
@@ -60,8 +48,10 @@ snippet import "import" i
 import argparse
 import matplotlib.pyplot as plt
 import numpy as np
+import tqdm
 from pathlib import Path
 from tempfile import TemporaryDirectory
+import pickle
 endsnippet
 
 snippet argparse "argparse" i
@@ -72,4 +62,8 @@ parser.add_argument("--warm", action="store_true", help="warm start")
 args = parser.parse_args()
 project_name: Optional[str] = args.pn
 warm_start: bool = args.warm
+endsnippet
+
+snippet sleep "embed" i
+import time; time.sleep(1000)
 endsnippet
