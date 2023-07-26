@@ -53,6 +53,8 @@ set hidden
 set showcmd
 set number
 set cursorline
+set equalalways
+autocmd VimResized * wincmd =
 
 set virtualedit=onemore
 set showmatch
@@ -72,6 +74,7 @@ set smartcase
 set incsearch
 set wrapscan
 set hlsearch
+set nonumber
 
 set completeopt-=preview
 

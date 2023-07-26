@@ -19,8 +19,13 @@ autocmd BufEnter *.cpp set tabstop=2
 autocmd BufEnter *.cpp set shiftwidth=2
 
 "---------- color schemes-----------"
+" default
+colorscheme eldar
+hi Normal ctermbg=16 guibg=#000000
+hi LineNr ctermbg=16 guibg=#000000
+
 autocmd BufEnter *.md colorscheme morning
-autocmd BufEnter *.tex colorscheme morning
+autocmd BufEnter *.tex colorscheme white
 
 "---------- indent ----------------"
 autocmd Filetype xml setlocal ts=2 sw=2 expandtab
