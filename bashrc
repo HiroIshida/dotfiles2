@@ -2,6 +2,8 @@ source $HOME/.bash/default.sh
 source $HOME/.bash/alias.sh
 source $HOME/.jump_alias.sh # created by editjump.py
 
+HISTTIMEFORMAT="%F %T " 
+
 FILE=$HOME/.bash/user_specific.sh
 if test -f "$FILE"; then
     source $FILE
@@ -14,14 +16,14 @@ cdls()
 alias cd="cdls"
 
 export PATH=$HOME/.local/bin:$PATH
-if [ -d "$HOME/.pyenv" ]; then
-    export PATH="$HOME/.pyenv/bin:$PATH"
-    # NOTE: Almost all tutorials on pyenv is wrong about this setting
-    # see https://github.com/pyenv/pyenv#installation
-    # Specifically, you need to eval $(pyenv init --path)
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-fi
+# if [ -d "$HOME/.pyenv" ]; then
+#     export PATH="$HOME/.pyenv/bin:$PATH"
+#     # NOTE: Almost all tutorials on pyenv is wrong about this setting
+#     # see https://github.com/pyenv/pyenv#installation
+#     # Specifically, you need to eval $(pyenv init --path)
+#     eval "$(pyenv init --path)"
+#     eval "$(pyenv init -)"
+# fi
 
 export SSH_USER=h-ishida
 export HISTCONTROL=ignoreboth:erasedups
@@ -55,8 +57,6 @@ lessf() {
 }
 
 cdf() {
-    local selected_file=$(fzf --preview 'echo {}' --query "$1" --select-1 --exit-0)
-    if [ -n "$selected_file" ]; then
-        cd "$(dirname "$selected_file")/.."
-    fi
+    local selected_dir=$(find . -type d|fzf --preview 'echo {}' --query "$1" --select-1 --exit-0)
+    cd $selected_dir
 }
