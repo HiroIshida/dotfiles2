@@ -24,8 +24,9 @@ colorscheme eldar
 hi Normal ctermbg=16 guibg=#000000
 hi LineNr ctermbg=16 guibg=#000000
 
-autocmd BufEnter *.md colorscheme morning
+autocmd BufEnter *.md colorscheme white
 autocmd BufEnter *.tex colorscheme white
+autocmd BufEnter *.txt colorscheme white
 
 "---------- indent ----------------"
 autocmd Filetype xml setlocal ts=2 sw=2 expandtab
