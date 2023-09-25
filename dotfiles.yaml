@@ -10,6 +10,8 @@ vimrc:
   .vimrc
 scripts/editjump.py:
   .local/bin/editjump.py
+scripts/hoeffding.py:
+  .local/bin/hoeffding.py
 gitconfig:
   .gitconfig
 tmux.conf:
