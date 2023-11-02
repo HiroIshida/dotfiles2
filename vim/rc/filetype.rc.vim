@@ -20,12 +20,13 @@ autocmd BufEnter *.cpp set shiftwidth=2
 
 "---------- color schemes-----------"
 " default
-colorscheme eldar
+" colorscheme eldar
 hi Normal ctermbg=16 guibg=#000000
 hi LineNr ctermbg=16 guibg=#000000
+colorscheme zenburn
 
-autocmd BufEnter *.md colorscheme white
-autocmd BufEnter *.tex colorscheme white
+autocmd BufEnter *.md colorscheme morning
+autocmd BufEnter *.tex colorscheme zenburn
 autocmd BufEnter *.txt colorscheme white
 
 "---------- indent ----------------"
