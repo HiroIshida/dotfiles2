@@ -1,6 +1,6 @@
 [user]
 	name = HiroIshida
-	email = spitfire.docomo@gmail.com
+	email = h-ishida@jsk.imi.i.u-tokyo.ac.jp
 [alias]
   tree = log --graph --oneline --decorate --all
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=iso
