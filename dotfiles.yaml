@@ -18,3 +18,5 @@ tmux.conf:
   .tmux.conf
 Xmodmap:
   .Xmodmap
+espanso:
+  .config/espanso
