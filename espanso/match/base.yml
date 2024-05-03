@@ -36,7 +36,7 @@ matches:
 
   # And much more! For more information, visit the docs: https://espanso.org/docs/
   - trigger: ":ai_proofread"
-    replace: "Your task is to take the text provided and rewrite it into a clear, grammatically correct version while preserving the original meaning as closely as possible. Correct any spelling mistakes, punctuation errors, verb tense issues, word choice problems, and other grammatical mistakes. Use bold formatting in markdown to emphasize the edited portions of the English text. Do not break the latex format."
+    replace: "Your task is to take the text provided and rewrite it into a clear, grammatically correct version while preserving the original meaning as closely as possible. Correct any spelling mistakes, punctuation errors, verb tense issues, word choice problems, and other grammatical mistakes. Use bold formatting in markdown to emphasize the edited portions of the English text. Do not break the latex format. Note that if the correction is minor, you may not need to make any changes and just say 'No errors found.'"
 
   - trigger: ":ai_revise"
     replace: "Your task is to take the text provided and perform sentence-level revisions to improve clarity, coherence, and overall readability while maintaining the original meaning. Focus on enhancing sentence structure, word choice, and logical flow. Consider splitting long, complex sentences into shorter, more manageable ones. Eliminate redundancies and unnecessary words. Use transitions to improve the connection between ideas. If needed, rearrange sentences to create a more logical progression. Use bold formatting in markdown to emphasize the edited portions of the English text. Preserve the original author's voice and style as much as possible. Do not break the latex format."
@@ -49,3 +49,9 @@ matches:
 
   - trigger: ":ai_defcheck"
     replace: "As an AI with a deep understanding of your research topic, please provide a list of technical terms, field-specific jargon, or math symbols used in the text without proper definition or contextual explanation. Please note that you will critique and provide feedback as if you were a strict peer reviewer assessing your work for publication. Expect a rigorous and unforgiving evaluation of your text."
+
+  - trigger: ":ai_guess"
+    replace: "The pasted text that I wrote is mimicking a specific native tongue writer. Could you infer which language I am mimicking? This can often be inferred from the collocation of words, grammatical preferences, and mistakes. The reason I need this information is to basically brush up my English writing. Then, please enumerate possible modifications to enhance the text to sound more like a native English speaker."
+
+  - trigger: ":ai_mimic"
+    replace: "The pasted text was written by a Japanese native speaker. Could you identify any indicators typical of Japanese speakers, not limited to mistakes, but also including word collocations, grammatical preferences, and so on? Then, rewrite the text in a more naturally native English style. Use bold formatting in Markdown to emphasize the edited portions of the English text. Do not alter the LaTeX format."
