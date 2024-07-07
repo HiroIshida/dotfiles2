@@ -1,3 +1,8 @@
+# 2024/07/08: main purpose of installing node-js is to install pyright-server
+# however, there is some problem installing node-js on the compute with ros-melodic 
+# Instead you can install pyright from snap
+# sudo snap install pyright --classic
+
 # https://askubuntu.com/questions/426750/how-can-i-update-my-nodejs-to-the-latest-version
 
 # NOTE: this uninstall melodic
