@@ -39,7 +39,10 @@ _replace_by_history() {
     READLINE_LINE="$l"
     READLINE_POINT=${#l}
 }
-bind -x '"\C-r": _replace_by_history'
+
+if [[ $- == *i* ]]; then
+    bind -x '"\C-r": _replace_by_history'
+fi
 
 # fzf setting
 vimf() {
