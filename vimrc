@@ -77,6 +77,7 @@ set hlsearch
 set nonumber
 
 set completeopt-=preview
+set cino=N-s
 
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 set clipboard=unnamed

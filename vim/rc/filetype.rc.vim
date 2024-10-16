@@ -20,13 +20,13 @@ autocmd BufEnter *.cpp set shiftwidth=2
 
 "---------- color schemes-----------"
 " default
-colorscheme eldar
+colorscheme delek
 hi Normal ctermbg=16 guibg=#000000
 hi LineNr ctermbg=16 guibg=#000000
 "colorscheme zenburn
 
 autocmd BufEnter *.md colorscheme morning
-autocmd BufEnter *.tex colorscheme xcode-tweaked
+autocmd BufEnter *.tex colorscheme morning
 autocmd BufEnter *.txt colorscheme white
 
 "---------- indent ----------------"
