@@ -20,3 +20,5 @@ Xmodmap:
   .Xmodmap
 espanso:
   .config/espanso
+gtk3.css:
+  .config/gtk-3.0/gtk.css
