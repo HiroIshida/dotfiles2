@@ -36,7 +36,7 @@ matches:
 
   # And much more! For more information, visit the docs: https://espanso.org/docs/
   - trigger: ":ai_japanese"
-    replace: "Your task is to take the text provided and translate it into clear and formal academic Japanese, preserving the original meaning and style as closely as possible"
+    replace: "Your task is to take the text provided and translate it into clear and formal academic Japanese, preserving the original meaning and style as closely as possible. Also, please keep the latex style. All the symbols including parentheses, brackets and punctuation marks must be 半角文字 not 全角文字. For example, you are not allowed to use 。or ), instead you should use . or ). However, You need to replace textit by textbf, as Japanese does not have italic style."
   - trigger: ":ai_proofread"
     replace: "Your task is to take the text provided and rewrite it into a clear, grammatically correct version while preserving the original meaning as closely as possible. Correct any spelling mistakes, punctuation errors, verb tense issues, word choice problems, and other grammatical mistakes. But do not correct something that is not a mistake but just a different style or preference. Use bold formatting in markdown to emphasize the edited portions of the English text. Do not break the latex format. The phrase or tone must follow the engineering or scientific style. Note that if the correction is minor, you may not need to make any changes and just say 'No errors found.'"
   - trigger: ":ai_fluent"
