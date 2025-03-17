@@ -63,3 +63,32 @@ cdf() {
     local selected_dir=$(find . -type d|fzf --preview 'echo {}' --query "$1" --select-1 --exit-0)
     cd $selected_dir
 }
+
+format() {
+    local dir
+    dir="$(pwd)"
+    while true; do
+        if [ -f "$dir/format.sh" ]; then
+            bash "$dir/format.sh"
+            return 0
+        fi
+        if [ "$dir" = "$HOME" ]; then
+            echo "format.sh not found in the directory tree up to $HOME."
+            return 1
+        fi
+        local parent
+        parent="$(dirname "$dir")"
+        if [ "$parent" = "$dir" ]; then
+            break
+        fi
+        dir="$parent"
+    done
+    echo "format.sh not found."
+    return 1
+}
+
+setxkbmap jp
+. "$HOME/.cargo/env"
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
