@@ -1,0 +1,53 @@
+syntax on
+
+set fenc=utf-8
+set nobackup
+set noswapfile
+set autoread
+set hidden
+set showcmd
+set cursorline
+set equalalways
+autocmd VimResized * wincmd =
+
+set virtualedit=onemore
+set showmatch
+set laststatus=2
+set statusline=%F
+set wildmode=list:longest
+nnoremap j gj
+nnoremap k gk
+
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+set ignorecase
+set smartcase
+set incsearch
+set wrapscan
+set hlsearch
+set nonumber
+set smartindent
+
+filetype plugin indent on
+autocmd FileType cpp setlocal expandtab tabstop=2 shiftwidth=2 autoindent
+autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 autoindent
+
+set completeopt-=preview
+set cino=N-s
+
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
+set clipboard=unnamed
+inoremap <silent> jj <ESC>
+inoremap <C-c> <ESC>
+nnoremap <S-Left>  <C-w><<CR>
+nnoremap <S-Right> <C-w>><CR>
+nnoremap <S-Up>    <C-w>-<CR>
+nnoremap <S-Down>  <C-w>+<CR>
+
+command DOACTION w|!./action.sh
+cnoreabbrev ww DOACTION
+
+set mouse=a
+
