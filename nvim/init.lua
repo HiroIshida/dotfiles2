@@ -84,3 +84,7 @@ vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 vim.opt.clipboard:append("unnamedplus")
 vim.cmd('colorscheme vim')
+vim.cmd [[
+  highlight NormalFloat guibg=#f5c8c6 guifg=#1d1f21
+  highlight FloatBorder guibg=#1d1f21 guifg=#81a2be
+]]
