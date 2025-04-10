@@ -12,6 +12,8 @@ scripts/editjump.py:
   .local/bin/editjump.py
 scripts/hoeffding.py:
   .local/bin/hoeffding.py
+scripts/treecat.sh:
+  .local/bin/treecat.sh
 gitconfig:
   .gitconfig
 tmux.conf:
