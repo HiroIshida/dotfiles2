@@ -25,6 +25,17 @@ require("lazy").setup({
     "williamboman/mason-lspconfig.nvim",
 	"junegunn/fzf.vim",
 	"junegunn/fzf",
+	{
+	  "ray-x/lsp_signature.nvim",
+	  event = "InsertEnter",
+	  opts = {
+		hint_enable = false,
+		handler_opts = {
+		  border = "none",
+		},
+		max_width = function() return vim.api.nvim_win_get_width(0) * 0.8 end,
+	  },
+	},
     "github/copilot.vim",
   },
   install = { colorscheme = { "habamax" } },
