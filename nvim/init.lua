@@ -70,6 +70,7 @@ vim.cmd([[
 ]])
 -- << Custom commands
 
+vim.diagnostic.disable()
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.number = false
