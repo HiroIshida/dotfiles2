@@ -23,12 +23,12 @@ require("lazy").setup({
     "neovim/nvim-lspconfig",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "github/copilot.vim",
 	"junegunn/fzf.vim",
 	"junegunn/fzf",
+    "github/copilot.vim",
   },
   install = { colorscheme = { "habamax" } },
-  checker = { enabled = true },
+  -- checker = { enabled = true },
 })
 -- << Setup plugin manager
 
@@ -58,6 +58,8 @@ vim.api.nvim_set_keymap('n', 'grn', '<cmd>lua vim.lsp.buf.rename()<CR>', { norem
 vim.api.nvim_set_keymap('n', 'grr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true }) 
 vim.api.nvim_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<ESC>', ':noh<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })
 -- << Setup keymaps
 
 -- >> Custom commands
