@@ -86,6 +86,7 @@ format() {
     echo "format.sh not found."
     return 1
 }
+export PROMPT_COMMAND='history -a; history -r'
 
 setxkbmap jp
 . "$HOME/.cargo/env"
