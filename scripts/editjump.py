@@ -8,13 +8,6 @@ from os.path import expanduser
 home = expanduser("~")
 jump_alias_file = os.path.join(home, ".jump_alias.sh")
 
-def get_cwd_modified():
-    path = os.getcwd()
-    reg = r"("+home+")(.*)"
-    m = re.search(reg, path)
-    path_modified = "~" + m.group(2)
-    return path_modified
-
 class Manager:
     def __init__(self):
         if not os.path.exists(jump_alias_file):
@@ -51,8 +44,7 @@ if __name__=='__main__':
         print("conflict. use -f to overwrite.")
         sys.exit()
 
-    cwdm = get_cwd_modified()
-    manager.add(postfix_new, cwdm)
+    manager.add(postfix_new, os.getcwd())
     strdump = manager.dump()
 
     with open(jump_alias_file, mode='w') as fp:
