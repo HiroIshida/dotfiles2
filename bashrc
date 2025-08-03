@@ -92,3 +92,6 @@ setxkbmap jp
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
+
+gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Super>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Super>Tab']"
