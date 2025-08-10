@@ -87,6 +87,30 @@ format() {
     return 1
 }
 
+activate() {
+    local dir="$PWD"
+    local found=""
+
+    while [ "$dir" != "/" ]; do
+        if [ -f "$dir/activate.sh" ]; then
+            found="$dir"
+            break
+        fi
+        dir="$(dirname "$dir")"
+    done
+
+    if [ -n "$found" ]; then
+        echo "Found activate.sh in: $found"
+        pushd "$found" > /dev/null || return 1
+        # shellcheck disable=SC1091
+        source "./activate.sh"
+        popd > /dev/null || return 1
+    else
+        echo "activate.sh not found."
+        return 1
+    fi
+}
+
 setxkbmap jp
 . "$HOME/.cargo/env"
 # Install Ruby Gems to ~/gems
