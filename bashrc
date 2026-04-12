@@ -45,6 +45,7 @@ if [[ $- == *i* ]]; then
 fi
 
 # fzf setting
+export FZF_DEFAULT_COMMAND='find . -path ./.venv -prune -o -print'
 vimf() {
     local selected_file=$(fzf --preview 'echo {}' --query "$1" --select-1 --exit-0)
     if [ -n "$selected_file" ]; then
@@ -60,8 +61,34 @@ lessf() {
 }
 
 cdf() {
-    local selected_dir=$(find . -type d|fzf --preview 'echo {}' --query "$1" --select-1 --exit-0)
+    local selected_dir=$(find . -path ./.venv -prune -o -type d -print|fzf --preview 'echo {}' --query "$1" --select-1 --exit-0)
     cd $selected_dir
+}
+
+copy() {
+    local base64_data
+    if [ $# -gt 0 ]; then
+        base64_data=$(cat "$@" | base64 | tr -d '\n')
+    else
+        base64_data=$(base64 | tr -d '\n')
+    fi
+    printf "\033]52;c;%s\a" "$base64_data"
+}
+
+copyf() {
+    local selected_file=$(fzf --preview 'cat {}' --query "$1" --select-1 --exit-0)
+    if [ -n "$selected_file" ]; then
+        copy "$selected_file"
+        echo "Copied content of '$selected_file' to clipboard."
+    fi
+}
+
+copyf() {
+    local selected_file=$(fzf --preview 'cat {}' --query "$1" --select-1 --exit-0)
+    if [ -n "$selected_file" ]; then
+        copy "$selected_file"
+        echo "Copied content of '$selected_file' to clipboard."
+    fi
 }
 
 format() {
