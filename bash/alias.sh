@@ -46,7 +46,11 @@ function mohou_diff () {
 alias argrep='grep argparse -A 20'
 
 # alias related to git
-source /usr/share/bash-completion/completions/git # to use auto compleation
+if [ -f /usr/share/bash-completion/completions/git ]; then
+    source /usr/share/bash-completion/completions/git # Linux: to use auto compleation
+elif [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ]; then
+    source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash # macOS (Xcode CLT)
+fi
 alias ggc='git commit'
 alias ggcp='git cherry-pick'
 alias ggcpa='git cherry-pick --abort'
@@ -65,7 +69,9 @@ alias ggs='git stash'
 alias ggsp='git stash pop'
 alias ggm='git merge'
 alias ggch='git checkout'
-__git_complete ggch _git_checkout
+if type __git_complete >/dev/null 2>&1; then
+    __git_complete ggch _git_checkout
+fi
 
 alias ggbd='git branch -D'
 alias ggchm='git checkout master'

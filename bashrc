@@ -138,11 +138,18 @@ activate() {
     fi
 }
 
-setxkbmap jp
-. "$HOME/.cargo/env"
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
-gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Super>Tab']"
-gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Super>Tab']"
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
+
+if [ "$(uname)" = "Linux" ]; then
+    setxkbmap jp
+    gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Super>Tab']"
+    gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Super>Tab']"
+elif [ "$(uname)" = "Darwin" ]; then
+    export CLICOLOR=1
+    export LSCOLORS=gxfxcxdxbxegedabagacad
+    alias ls='ls -GFh'
+fi
