@@ -1,0 +1,262 @@
+#!/usr/bin/env python3
+"""Download an arXiv paper's tex source and concatenate it into a single text file.
+
+Ported from https://github.com/h-ishida/arxiv-tex-concatenater
+"""
+
+import argparse
+import gzip
+import os
+import re
+import shutil
+import sys
+import tarfile
+import urllib.request
+import zipfile
+
+CACHE_BASE_DIR = os.path.join(os.path.expanduser("~"), ".cache", "arxivcat")
+
+
+def info(*args, **kwargs):
+    """Print progress messages to stderr so stdout stays pipe-friendly."""
+    print(*args, file=sys.stderr, **kwargs)
+
+
+def parse_paper_id(arg):
+    """
+    Extract the arXiv paper id from a URL or a bare id.
+    Accepts e.g.:
+        https://arxiv.org/abs/2405.02968
+        https://arxiv.org/pdf/2405.02968
+        https://arxiv.org/abs/hep-th/9901001
+        arXiv:2405.02968
+        2405.02968
+    """
+    arg = arg.strip()
+    m = re.search(r"arxiv\.org/(?:abs|pdf|e-print|html)/(.+?)/?$", arg)
+    if m:
+        paper_id = m.group(1)
+    else:
+        paper_id = re.sub(r"^arxiv:", "", arg, flags=re.IGNORECASE)
+    paper_id = re.sub(r"\.pdf$", "", paper_id)
+    if not re.match(r"^(\d{4}\.\d{4,5}(v\d+)?|[a-z-]+(\.[A-Z]{2})?/\d{7}(v\d+)?)$", paper_id):
+        raise ValueError(f"Could not parse arXiv paper id from: {arg}")
+    return paper_id
+
+
+def download_arxiv_source(paper_id, outdir):
+    """
+    Download the source of the given arXiv paper into 'outdir'.
+    Return the local path of the downloaded file.
+    """
+    url = f"https://arxiv.org/e-print/{paper_id}"
+    info(f"Downloading from: {url}")
+    local_filename = os.path.join(outdir, "arxiv_source")
+    req = urllib.request.Request(url, headers={"User-Agent": "arxivcat"})
+    with urllib.request.urlopen(req) as r, open(local_filename, "wb") as f:
+        shutil.copyfileobj(r, f)
+    return local_filename
+
+
+def _tar_extractall(tf, extract_to):
+    try:
+        tf.extractall(path=extract_to, filter="data")
+    except TypeError:  # Python < 3.12 has no 'filter' argument
+        tf.extractall(path=extract_to)
+
+
+def extract_archive(archive_path, extract_to):
+    """
+    Detect the file type (.tar.gz, .tar, .zip, single gzipped .tex, etc.)
+    and extract it into 'extract_to'.
+    """
+    try:
+        with tarfile.open(archive_path, "r:*") as tf:
+            _tar_extractall(tf, extract_to)
+        return
+    except tarfile.ReadError:
+        pass
+    try:
+        with zipfile.ZipFile(archive_path, "r") as zf:
+            zf.extractall(path=extract_to)
+        return
+    except zipfile.BadZipFile:
+        pass
+    # Some arXiv papers are submitted as a single gzipped .tex file.
+    try:
+        with gzip.open(archive_path, "rb") as gf:
+            content = gf.read()
+        if b"\\documentclass" in content or b"\\begin{document}" in content:
+            with open(os.path.join(extract_to, "main.tex"), "wb") as f:
+                f.write(content)
+            return
+    except (OSError, EOFError):
+        pass
+    raise ValueError("Unknown file format or broken archive (paper may be PDF-only).")
+
+
+def find_main_texfile(root_dir):
+    """
+    Search all .tex files under 'root_dir'.
+    1) If there is a file named 'main.tex', return it immediately.
+    2) Otherwise, look for the first file containing '\\begin{document}' and return that.
+    3) If none is found, return the first .tex file found (fallback).
+    4) If no .tex files are found, return None.
+    """
+    tex_files = []
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        for fn in filenames:
+            if fn.lower().endswith(".tex"):
+                full_path = os.path.join(dirpath, fn)
+                tex_files.append(full_path)
+    for f in tex_files:
+        if os.path.basename(f).lower() == "main.tex":
+            return f
+    for f in tex_files:
+        with open(f, "r", encoding="utf-8", errors="ignore") as fp:
+            content = fp.read()
+            if r"\begin{document}" in content:
+                return f
+    if tex_files:
+        return tex_files[0]
+    return None
+
+
+def parse_includes(tex_content):
+    """
+    Parse the content of a .tex file to find any referenced files via
+    \\input or \\include.
+    """
+    include_files = []
+    lines = tex_content.splitlines()
+    for line in lines:
+        stripped_line = line.strip()
+        if "%" in stripped_line:
+            comment_index = stripped_line.index("%")
+            stripped_line = stripped_line[:comment_index]
+        pattern_brackets = r"\\(?:include|input)\{([^}]*)\}"
+        pattern_space = r"\\(?:include|input)\s+([^\s]+)"
+        matches_bracketed = re.findall(pattern_brackets, stripped_line)
+        matches_space = re.findall(pattern_space, stripped_line)
+        for m in matches_bracketed:
+            include_files.append(m)
+        for m in matches_space:
+            include_files.append(m)
+    return include_files
+
+
+def resolve_includes(root_tex_path, visited=None):
+    """
+    Recursively follow \\input / \\include references starting from 'root_tex_path'.
+    Return a list of absolute .tex file paths in the order they should be concatenated.
+    """
+    if visited is None:
+        visited = set()
+    results = []
+    abspath = os.path.abspath(root_tex_path)
+    if abspath in visited:
+        return results
+    visited.add(abspath)
+    results.append(abspath)
+    with open(abspath, "r", encoding="utf-8", errors="ignore") as fp:
+        content = fp.read()
+    includes = parse_includes(content)
+    base_dir = os.path.dirname(abspath)
+    for inc in includes:
+        candidates = []
+        if inc.lower().endswith(".tex"):
+            candidates.append(os.path.join(base_dir, inc))
+        else:
+            candidates.append(os.path.join(base_dir, inc + ".tex"))
+            candidates.append(os.path.join(base_dir, inc))
+        found_path = None
+        for c in candidates:
+            if os.path.isfile(c):
+                found_path = c
+                break
+        if found_path:
+            results.extend(resolve_includes(found_path, visited))
+    return results
+
+
+def concat_texfiles(all_tex_files, cat_txt_path):
+    with open(cat_txt_path, "w", encoding="utf-8") as outfp:
+        for texf in all_tex_files:
+            with open(texf, "r", encoding="utf-8", errors="ignore") as infp:
+                outfp.write(f"% >>>>>>>> BEGIN {texf}\n")
+                outfp.write(infp.read())
+                outfp.write(f"\n% <<<<<<<< END {texf}\n\n")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Concatenate the tex source of an arXiv paper into a single text file."
+    )
+    parser.add_argument("arxiv", help="arXiv URL (abs/pdf/e-print page) or paper id")
+    parser.add_argument(
+        "-o", "--output",
+        default=None,
+        help="Also copy the concatenated text to this path.",
+    )
+    parser.add_argument(
+        "-f", "--force",
+        action="store_true",
+        help="Re-download and re-concatenate even if cached.",
+    )
+    parser.add_argument(
+        "-s", "--silent",
+        action="store_true",
+        help="Do not print the concatenated text to stdout.",
+    )
+    args = parser.parse_args()
+
+    try:
+        paper_id = parse_paper_id(args.arxiv)
+    except ValueError as e:
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    paper_cache_dir = os.path.join(CACHE_BASE_DIR, paper_id.replace("/", "-"))
+    cat_txt_path = os.path.join(paper_cache_dir, "cat.txt")
+
+    if args.force and os.path.exists(paper_cache_dir):
+        shutil.rmtree(paper_cache_dir)
+
+    if not os.path.exists(paper_cache_dir):
+        os.makedirs(paper_cache_dir, exist_ok=True)
+        try:
+            archive_path = download_arxiv_source(paper_id, paper_cache_dir)
+            extract_archive(archive_path, paper_cache_dir)
+        except Exception as e:
+            shutil.rmtree(paper_cache_dir, ignore_errors=True)
+            print(f"error: {e}", file=sys.stderr)
+            sys.exit(1)
+    else:
+        info(f"Cache directory '{paper_cache_dir}' already exists. Skipping download.")
+
+    if os.path.exists(cat_txt_path):
+        info(f"Concatenated .tex file located at: {cat_txt_path}")
+    else:
+        root_tex = find_main_texfile(paper_cache_dir)
+        if root_tex is None:
+            info("error: no .tex file found (paper may be PDF-only)")
+            sys.exit(1)
+        info(f"Root .tex file found: {root_tex}")
+        all_tex_files = resolve_includes(root_tex)
+        info("Files to be concatenated in order:")
+        for f in all_tex_files:
+            info("  " + f)
+        concat_texfiles(all_tex_files, cat_txt_path)
+        info(f"All files have been concatenated into: {cat_txt_path}")
+
+    if args.output is not None:
+        shutil.copy(cat_txt_path, args.output)
+        info(f"Copied to: {args.output}")
+
+    if not args.silent:
+        with open(cat_txt_path, "r", encoding="utf-8") as f:
+            shutil.copyfileobj(f, sys.stdout)
+
+
+if __name__ == "__main__":
+    main()

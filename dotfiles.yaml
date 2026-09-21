@@ -14,6 +14,8 @@ scripts/hoeffding.py:
   .local/bin/hoeffding.py
 scripts/treecat.sh:
   .local/bin/treecat.sh
+scripts/arxivcat:
+  .local/bin/arxivcat
 gitconfig:
   .gitconfig
 tmux.conf:
